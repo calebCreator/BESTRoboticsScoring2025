@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=0, user-scalable=no">
+        <link rel="stylesheet" href="style.css" />
+        <link rel="icon" type="image/png" href="img/logo.png">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    </head>
+    
+    <body onload="init()">
+        <script src="main.js"></script>
+        
+        <div class="login">
+            
+            <div class="div">
+                
+                <div id="header">
+                    <a href="sign-in.html"><img id="logo" src="img/logo.png" /></a>
+                    <h1 id="title">Scoring Calculator</h1>
+                    <img id="image" src="img/image-2.png"/>
+                </div>
+                
+                <div class="codediv">
+                    
+                    
+                    <h1 id="codeDisplay">Field Code:    </h1>
+                    <h1  id="matchNumber">Match: <input type="number" id="matchNum"></h1>
+                    
+                    
+                    <label for="Match#">   </label>
+                    <h1 id="teamDisplay">Team: Allen High School (58)</h1>
+                    
+                    <div id="inputDiv">
+                        </div>
+                        <div class="code-container">
+                        <pre class="code-column" id="left">
+                        </pre>
+                        <pre class="code-column" id="right">
+                         </pre>
+                    </div>
+                        
+                        <h1>Total Score: <span class="score" id="totalScore">0</span></h1>
+                    
+                        <input id="legal" type="checkbox" class="CheckBox">
+                        <label for="legal">By clicking this checkbox, I confirm that my team's scores are correct and understand that these scores cannot be changed, contested, or processed in any way after submission.</label> 
+                       
+                        <div id="jsonOut">  </div>
+                        <button class="General-Button" class="generalbutton" onclick="send()">Submit Score</button>
+                        
+                    </div>
+                    
+                    <p class="version">Version 0.1.4</p>
+                </div>
+                
+            </div>
+            
+        </div>
+        
+    </body>
+</html>

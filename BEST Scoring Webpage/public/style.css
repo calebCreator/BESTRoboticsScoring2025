@@ -1,0 +1,270 @@
+/*
+****************************************************************************
+Program Name: BEST Robotics Scoring
+Purpose: We want to digitize the BEST scoring system so that points 
+         earned in the game can be calculated digitally. We will 
+         create a program that allows for total points to be 
+         calculated and signed off by team members (drivers) for 
+         confirmation as well as sent to scorekeepers for team rankings. 
+
+By: Caleb Clark, Danielle Hwang, Seoyoon Jeong, Arohi Joshi-Gadre, and Abraham Magaña
+Date: 09/03/2025
+Version: 0.1
+****************************************************************************
+*/
+
+/*Standardizing the font family*/
+html {
+    font-family: "Montserrat", sans-serif;
+}
+
+.errortext {
+    color: red;
+}
+
+#jsonOut {
+    margin-top: 20px;
+    color: red;
+}
+
+/*Dropdown formatting*/
+
+.dropdown {
+    position: relative;
+    width: 150px;
+    height:30px;
+    top: 1px;
+    left: 0;
+    
+    
+    background-color: #d9d9d9;
+    border-radius: 114px;
+    text-align: center;
+    font-size: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 2px solid black;
+}
+
+.container {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    font-family:"Montserrat";
+}
+
+/* +/- button formatting */
+.incrementbutton {
+    width: 40px;
+    height: 40px;
+    background-color: #8cc49c;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+
+    font-family: "Inter-Italic", Helvetica, sans-serif;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 0.1;        /* Important for vertical centering */
+    color: #000;
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+
+/*Properties of the grey spaces where you can increment/decrement with the +/- buttons*/
+.sum {
+    position: relative;
+    width: 80px;
+    height: 40px;
+    top: 1px;
+    left: 0;
+    background-color: #d9d9d9;
+    border-radius: 45px;
+    text-align: center;
+    font-size: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 2px solid gray;
+}
+
+.number, #matchNum {
+    position: relative;
+    width: 100px;
+    height: 40px;
+    top: 1px;
+    left: 0;
+    background-color: #d9d9d9;
+    border-radius: 45px;
+    text-align: center;
+    font-size: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 2px solid gray;
+}
+
+
+.CheckBox {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    accent-color: #8cc49c;
+}
+
+.downloadbutton, .clearbutton /*download button*/{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 14px;
+    
+    height: 30px;
+    background-color: #8bc49f;
+    border-radius: 9999px;
+    overflow: hidden;
+    border: 1px solid;
+    position: relative;
+    top: 15px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 17px;
+    letter-spacing: 0;
+    line-height: 24px;
+    white-space: nowrap;
+    text-align: center;
+}
+
+
+
+
+
+.General-Button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 14px;
+    background-color: #8bc49f;
+    border-radius: 9999px;
+    overflow: hidden;
+    border: 1px solid;
+    position: relative;
+    top: 15px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 24px;
+    white-space: nowrap;
+}
+
+/* Logo image (left side) */
+#logo {              /* Prevents it from getting too big */
+  height: auto;                   /* Keeps proportions */
+   
+  object-fit: contain;
+}
+
+/* Title (centered) */
+#title {
+  flex: 1;                        /* Takes remaining space */
+  text-align: center;
+  color: white;
+  font-size: clamp(16px, 3vw, 36px); /* Auto-scaling text */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-left: -2vw; 
+}
+
+/* Right-side image */
+#image {
+  height: auto;
+  object-fit: contain;
+  /*margin-left: -2vw; */
+}
+
+#logo, #image {
+  flex-shrink: 1; /* allows them to shrink instead of forcing overflow */
+  width: 20vw; /* smaller default */
+  max-width: 220px;
+}
+
+#header {
+    justify-self: stretch;
+    display: flex;                  /* Layout children side by side */
+    align-items: center;            /* Vertically center logo, title, image */
+    justify-content: space-between; /* Push logo left, image right, title centered */
+    padding: 0 2vw;     /* Responsive horizontal padding */
+    background-color: #222222;
+    margin-left: -8px;
+    margin-top: -8px;
+    width: 97%;
+    min-height: 80px;
+    flex-wrap: nowrap;                /* Allows wrapping on smaller screens */
+    gap: 1vw;  
+    
+    
+}
+
+
+.login {
+    background-color: #ffffff;
+    display: grid;
+    justify-items: center;
+    align-items: start;
+    width: 100%;
+}
+
+
+/*creates the two columns format*/
+.code-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Creates two equal-width columns */
+  gap: 20px; /* Adds space between columns */
+  /*place-items: center;*/
+}
+
+.code-column {
+  background-color: #f0f0f0;
+  padding: 15px;
+  border-radius: 5px;
+  overflow: auto; /* Adds scrollbar if content overflows */
+  align-items: center;
+  justify-content: center;
+  
+  display: grid;
+  place-items: center;
+}
+
+
+/*@media (max-width:834px) {
+    /*750 is when it interupts the text
+    .login .overlap-group {
+    height:225px;
+    
+    /*Make sure to put scoring calculator
+    in two lines with starting at visibility
+    set to 0/hidden
+  }
+  
+  .login .text-wrapper {
+    left: calc(50% - 348px);
+    /*(Used to be -23px) 
+    Eventually this will be replaced by the
+    version thats split into two lines 
+  }
+  
+  
+  .login .log-in {
+   left: 50%;
+   /*50%
+  }*/
+ @media (max-width:1000px) {
+     #header {
+         height:130px;
+     }
+ }
