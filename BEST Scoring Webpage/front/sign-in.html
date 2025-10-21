@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="globals.css" />
+        <link rel="stylesheet" href="styleguide.css" />
+        <link rel="stylesheet" href="style.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    </head>
+    
+    <body>
+        
+        <div class="login">
+            
+            <div class="div">
+                
+                <div id="header">
+                    <img id="logo" src="img/logo.png" />
+                    <h1 id="title">Scoring Calculator</h1>
+                    <img id="image" src="img/image-2.png"/>
+                </div>
+                
+              
+                <div class="overlap">
+                    <label class="fielddropdown" for="myDropdown">Field:</label>
+                    <select name="myOptions" class="dropdown" id="field">
+                        <option value="NA">-</option>
+                        <option value="01">1</option>
+                        <option value="02">2</option>
+                        <option value="03">3</option>
+                        <option value="04">4</option>
+                    </select>  
+                    <br>
+                    <label class="fielddropdown" for="myDropdown">Color:</label>
+                    <select name="myOptions" class="dropdown" id="color">
+                        <option value="NA">-</option>
+                        <option value="GR">Green</option>
+                        <option value="YL">Yellow</option>
+                        <option value="RD">Red</option>
+                        <option value="BL">Blue</option>
+                    </select>
+                
+                    <script src="sign-in.js"></script>
+                    <!--<input style="visibility:visible" type="text" id="gcode" name="gamecode" placeholder="Enter access code here"><br> -->
+                    <br>
+                    <div class="errordiv">
+                        <p id="errortext" style='display:none' class="errortext">Please enter all inputs.</p>
+                    </div>
+                    
+                    <button onclick="logIn()" class="log-in">Log In</button>
+                </div>
+                
+            </div>
+        </div>
+        <p class="version">Version 0.1.4</p>
+    </body>
+</html>

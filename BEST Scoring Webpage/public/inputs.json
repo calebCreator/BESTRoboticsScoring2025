@@ -1,0 +1,152 @@
+{
+    " Golden Factoid Collected":{
+        "type":"checkbox",
+        "options":"any",
+        "maxInput":"1",
+        "pointValue":"100",
+        "multiplied":"false",
+        "lineBreak":"true",
+        "column":"left"
+    },
+    "White Factoid Collected":{
+        "type":"checkbox",
+        "options":"any",
+        "maxInput":"1",
+        "pointValue":"100",
+        "multiplied":"false",
+        "lineBreak":"true",
+        "column":"left"
+    },
+    "True Factoids Collected":{
+        "type":"number",
+        "options":"any",
+        "maxInput":"78",
+        "pointValue":"10",
+        "multiplied":"false",
+        "lineBreak":"true",
+        "column":"left"
+        
+    },
+    "False Factoids Collected":{
+        "type":"number",
+        "options":"any",
+        "maxInput":"78",
+        "pointValue":"-10",
+        "multiplied":"false",
+        "lineBreak":"true",
+        "column":"left"
+        
+    },
+    "True Factoids Sorted":{
+        "type":"number",
+        "options":"any",
+        "maxInput":"78",
+        "pointValue":"5",
+        "multiplied":"false",
+        "lineBreak":"true",
+        "column":"left"
+        
+    },
+    "False Factoids Sorted":{
+        "type":"number",
+        "options":"any",
+        "maxInput":"78",
+        "pointValue":"-5",
+        "multiplied":"false",
+        "lineBreak":"true",
+        "column":"left"
+        
+    },
+    "True Factoids Installed":{
+        "type":"number",
+        "options":"any",
+        "maxInput":"117",
+        "pointValue":"15",
+        "multiplied":"false",
+        "lineBreak":"true",
+        "column":"left"
+    },
+    "False Factoids Installed":{
+        "type":"number",
+        "options":"any",
+        "maxInput":"117",
+        "pointValue":"-15",
+        "multiplied":"false",
+        "lineBreak":"true",
+        "column":"left"
+        
+    },
+    "WSD Gate Latch Released":{
+        "type":"number",
+        "options":"any",
+        "maxInput":"4",
+        "pointValue":"0,5,15,45,145",
+        "multiplied":"false",
+        "lineBreak":"true",
+        "column":"right"
+        
+    },
+    "Tweeter Tower Activation":{
+        "type":"number",
+        "options":"any",
+        "maxInput":"4",
+        "pointValue":"7",
+        "multiplied":"false",
+        "lineBreak":"true",
+        "column":"right"
+    },
+    "2-Node Neural Net Connections":{
+        "type":"number",
+        "options":"any",
+        "maxInput":"4",
+        "pointValue":"20",
+        "multiplied":"false",
+        "lineBreak":"true",
+        "column":"right"
+    },
+    "3-Node Neural Net Connections":{
+        "type":"number",
+        "options":"any",
+        "maxInput":"2",
+        "pointValue":"60",
+        "multiplied":"false",
+        "lineBreak":"true",
+        "column":"right"
+    },
+    "AI Model Selected":{
+        "type":"number",
+        "options":"any",
+        "maxInput":"1",
+        "pointValue":"20",
+        "multiplied":"false",
+        "lineBreak":"true",
+        "column":"right"
+    },
+    "Live 2-Node Neural Net Bonus":{
+        "type":"number",
+        "options":"any",
+        "maxInput":"4",
+        "pointValue":"30",
+        "multiplied":"false",
+        "lineBreak":"true",
+        "column":"right"
+    },
+     "Live 3-Node Neural Net Bonus":{
+        "type":"number",
+        "options":"any",
+        "maxInput":"2",
+        "pointValue":"90",
+        "multiplied":"false",
+        "lineBreak":"true",
+        "column":"right"
+    },
+    "Network Configuration Match":{
+        "type":"dropdown",
+        "options": "A,B,C", 
+        "maxInput":"117",
+        "pointValue":"15",
+        "multiplied":"false",
+        "lineBreak":"true",
+        "column":"right"
+    }
+}
