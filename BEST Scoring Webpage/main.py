@@ -1,9 +1,40 @@
 import os
 import sqlite3
 from flask import Flask, request, jsonify, send_from_directory, session, redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
+from os import path
+
+#SQL Alchemy attempt
+#db = SQLAlchemy()
+#DB_NAME = "database.db"
+
 app = Flask(__name__)
 app.secret_key = os.urandom(24)  # Secret key for session management
+#SQL Alchemy attempt
+#app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DB_NAME}"
 PUBLIC_DIR = os.path.join(os.path.dirname(__file__), 'public')
+#SQL Alchemy attempt
+#db.init_app(app)
+
+
+#This function creates a database if the database doesn't exist
+def create_database(app):
+    print("Entered into function")
+    if not path.exists('BEST Scoring Webpage/' + DB_NAME):
+        with app.app_context():
+            db.create_all()
+            print("Database created!")
+
+#SQL Alchemy attempt
+#create_database(app)
+
+
+
+
+
+
+
+
 
 # API endpoint to validate localStorage and create session
 @app.route('/api/validate-session', methods=['POST'])
@@ -37,18 +68,28 @@ def recv_data():
     #Do things with data
     #print(data)
     #print(data.keys())
+    storeJSONInDatabase(data)
+    
+    
+    response = {
+        'status': 'sucesss',
+        'message': 'Data saved to database'
+    }
+    return jsonify(response), 200
 
+
+def storeJSONInDatabase(json):
     #Read the keys and values and turn them into SQL commands
     #Remove all the spaces in each key, so the
-    keys = ["Z" + key.replace(" ", "_").replace("-", "_") for key in data]
+    keys = ["Z" + key.replace(" ", "_").replace("-", "_") for key in json]
     keyStr = ", ".join(keys)
     keyStr = "(match_id, " + keyStr + ")"
 
     keysTypes = " TEXT, ".join(keys)
     keysTypes = "(match_id INTEGER, " + keysTypes + " TEXT)"
 
-    id = str(data["matchNum"])
-    values = data.values()
+    id = str(json["matchNum"])
+    values = json.values()
     valuesStr = '","'.join(values)
     valuesStr = '("' + id + '","' + valuesStr + '")'
 
@@ -63,12 +104,6 @@ def recv_data():
     connection.commit()
     cursor.close()
     connection.close()
-    
-    response = {
-        'status': 'sucesss',
-        'message': 'Data saved to database'
-    }
-    return jsonify(response), 200
 
 
 @app.route('/')

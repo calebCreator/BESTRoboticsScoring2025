@@ -14,8 +14,39 @@ Version: 0.1
 */
 
 /*Standardizing the font family*/
+
 html {
     font-family: "Montserrat", sans-serif;
+}
+.flex{
+   text-align: start;
+    align-items: start;
+    justify-content: initial;
+    position: start; 
+    display: inline;
+    margin-left: 0px;
+    flex-wrap: nowrap;
+}
+
+.item {
+  /* Styling for the items */
+  padding: 20px;
+  background-color: lightblue;
+}
+
+}
+.container {
+    text-align: start;
+    align-items: start;
+    justify-content: initial;
+    position: start;
+}
+
+
+.code-column{
+    text-align: start;
+    align-items: start;
+    justify-content: initial;
 }
 
 .errortext {
@@ -47,29 +78,27 @@ html {
 }
 
 .container {
-    align-items: center;
-    text-align: center;
-    justify-content: center;
+    
     font-family:"Montserrat";
 }
 
 /* +/- button formatting */
 .incrementbutton {
-    width: 40px;
-    height: 40px;
+    width:50px;
+    height: 50px;
     background-color: #8cc49c;
-    border-radius: 5px;
-    align-items: center;
-    justify-content: center;
-
-    font-family: "Inter-Italic", Helvetica, sans-serif;
+    border-radius: 10px;
+    align-items: end;
+    justify-content: end;
+  
     font-weight: 400;
     font-size: 30px;
     line-height: 0.1;        /* Important for vertical centering */
     color: #000;
-    padding: 0;
-    margin: 0;
-    border: none;
+    padding: 6px;
+    margin: 100;
+ border: 6px solid #f0f0f0;
+    
 }
 
 
@@ -87,6 +116,12 @@ html {
     margin-top: 10px;
     margin-bottom: 10px;
     border: 2px solid gray;
+    align-items: inline;
+    justify-content: end;
+    justify-self: end;
+
+   
+
 }
 
 .number, #matchNum {
@@ -110,6 +145,8 @@ html {
     width: 40px;
     height: 40px;
     accent-color: #8cc49c;
+    place-content: end;
+
 }
 
 .downloadbutton, .clearbutton /*download button*/{
@@ -162,7 +199,7 @@ html {
 }
 
 /* Logo image (left side) */
-#logo {              /* Prevents it from getting too big */
+/#logo {              /* Prevents it from getting too big */
   height: auto;                   /* Keeps proportions */
    
   object-fit: contain;
@@ -194,7 +231,6 @@ html {
 }
 
 #header {
-    justify-self: stretch;
     display: flex;                  /* Layout children side by side */
     align-items: center;            /* Vertically center logo, title, image */
     justify-content: space-between; /* Push logo left, image right, title centered */
@@ -207,7 +243,6 @@ html {
     flex-wrap: nowrap;                /* Allows wrapping on smaller screens */
     gap: 1vw;  
     
-    
 }
 
 
@@ -216,7 +251,7 @@ html {
     display: grid;
     justify-items: center;
     align-items: start;
-    width: 100%;
+    width: 100vw;
 }
 
 
@@ -225,7 +260,10 @@ html {
   display: grid;
   grid-template-columns: 1fr 1fr; /* Creates two equal-width columns */
   gap: 20px; /* Adds space between columns */
-  /*place-items: center;*/
+  /*place-items: start;*/
+  text-align: start;
+  justify-content: start;
+  
 }
 
 .code-column {
@@ -233,11 +271,10 @@ html {
   padding: 15px;
   border-radius: 5px;
   overflow: auto; /* Adds scrollbar if content overflows */
-  align-items: center;
-  justify-content: center;
-  
+  font-family: "Montserrat", sans-serif;
   display: grid;
-  place-items: center;
+  text-align: start;
+  justify-content: start;
 }
 
 

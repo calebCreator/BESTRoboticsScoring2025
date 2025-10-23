@@ -124,69 +124,108 @@ function addInputs(jsonObj){
         }
         
         if(type == "number"){
-            addInputNumber(name, pointValue, lineBreak, maxInput, isMultiplied,div);
+            addInput("number", name, pointValue, lineBreak,isMultiplied,div,theMaxInput=maxInput);
         }else if(type == "dropdown"){
-            addInputDropdown(name, pointValue, lineBreak, options, isMultiplied,div);
+            addInput("dropdown", name, pointValue, lineBreak, isMultiplied,div, theOptions=options);
         }else if(type == "checkbox"){
-            addInputCheckbox(name, pointValue, lineBreak, isMultiplied, div);
+            addInput("checkbox", name, pointValue, lineBreak, isMultiplied, div);
         }else{
             console.log("Invalid input type: " + input);
         }
     }
 }
 
-function addInputNumber(name, pointValue, newLine, maxInput, isMultiplied, column){
+function addInput(objectType, name, pointValue, newLine, isMultiplied, column, theMaxInput=100000, theOptions=""){
     let inputDiv = document.getElementById(column);
-    let container = document.createElement("span");
+    let container = document.createElement("div");
     container.setAttribute("class","container");
-    
+
     //Label
     let label = document.createElement("label");
     label.innerText = name + ": ";
-    container.appendChild(label);
-    
-    //Deincrement button
-    let minus = document.createElement("button");
-    minus.setAttribute("class","incrementbutton");
-    //minus.addEventListener("click", deincrement);
-    minus.onclick = function(){deincrement(name);};
-    minus.innerText = "-"
-    container.appendChild(minus);
-    
-    //Number input
-    let input = document.createElement("input");
-    input.setAttribute("class","sum");
-    input.setAttribute("id",name);
-    
-    //Store variables in the element
-    input.setAttribute("data-max", maxInput);
-    input.setAttribute("data-pointvalue", pointValue);
-    input.setAttribute("data-ismultiplied", isMultiplied);
-    
-    input.value = 0;
-    input.type = "number";
-    container.appendChild(input);
-    
-    //Increment button
-    let add = document.createElement("button");
-    add.setAttribute("class","incrementbutton");
-    //minus.addEventListener("click", deincrement);
-    add.onclick = function(){increment(name);};
-    add.innerText = "+"
-    container.appendChild(add);
-    
+    //container.appendChild(label);
+    addFlexDivAroundElement(container, label);
+
+    //Create the input
+    if(objectType == "number"){
+        //Deincrement button
+        let minus = document.createElement("button");
+        minus.setAttribute("class","incrementbutton");
+        minus.onclick = function(){deincrement(name);};
+        minus.innerText = "-";
+        //container.appendChild(minus);
+        addFlexDivAroundElement(container, minus);
+
+        //Number input
+        let input = document.createElement("input");
+        input.setAttribute("class","sum");
+        input.setAttribute("id",name);
+
+        //Store variables in the element
+        input.setAttribute("data-max", theMaxInput);
+        input.setAttribute("data-pointvalue", pointValue);
+        input.setAttribute("data-ismultiplied", isMultiplied);
+
+        input.value = 0;
+        input.type = "number";
+        //container.appendChild(input);
+        addFlexDivAroundElement(container, input);
+
+        //Increment button
+        let add = document.createElement("button");
+        add.setAttribute("class","incrementbutton");
+        //minus.addEventListener("click", deincrement);
+        add.onclick = function(){increment(name);};
+        add.innerText = "+"
+        //container.appendChild(add);
+        addFlexDivAroundElement(container, add);
+    }else if(objectType == "dropdown"){
+        //Dropdown input
+        let input = document.createElement("select");
+        input.setAttribute("class","Dropdown sum");
+
+        //Store variables in the element
+        input.setAttribute("data-pointvalue", pointValue);
+        input.setAttribute("data-ismultiplied", isMultiplied);
+
+        input.setAttribute("id",name);
+
+        //Add options
+        options = theOptions.split(",");
+        for (value of options){
+            let option = document.createElement("option");
+            option.innerText = value;
+            input.appendChild(option);
+        }
+        input.setAttribute("id",name);
+        //container.appendChild(input);
+        addFlexDivAroundElement(container, input);
+    }else if(objectType == "checkbox"){
+        //Checkbox input
+        let input = document.createElement("input");
+        input.setAttribute("class","CheckBox sum");
+        input.setAttribute("id",name);
+        
+        //Store variables in the element
+        input.setAttribute("data-pointvalue", pointValue);
+        input.setAttribute("data-ismultiplied", isMultiplied);
+        
+        input.type = "checkbox";
+        //container.appendChild(input);
+        addFlexDivAroundElement(container, input);
+    }else{
+        console.log("Invalid input type")
+    }
+
     //Multiplier label
     let span = document.createElement("span");
     span.setAttribute("class", "multiplierLabel");
-    //console.log(pointValue);
-    //Choose the seccond point value if it is a list
-    
     span.innerText = "x" + pointValue;
-    
     if(hasMultiplierLabels){
-        container.appendChild(span);
+        //container.appendChild(span);
+        addFlexDivAroundElement(container, span);
     }
-    
+
     //Whether to include <br> or not
     if(newLine){
         container.appendChild(document.createElement("br"));
@@ -194,105 +233,23 @@ function addInputNumber(name, pointValue, newLine, maxInput, isMultiplied, colum
     
     //Add the container to to the <div>
     inputDiv.appendChild(container);
+
+    
+    
 }
 
-function addInputDropdown(name, pointValue, newLine, options, isMultiplied, column){
-    let inputDiv = document.getElementById(column);
-    let container = document.createElement("span");
-    container.setAttribute("class","container");
-    
-    //Label
-    let label = document.createElement("label");
-    label.setAttribute("for", "");
-    label.innerText = name + ": ";
-    container.appendChild(label);
-    
-    //Dropdown input
-    let input = document.createElement("select");
-    input.setAttribute("class","Dropdown sum");
-    
-    //Store variables in the element
-    input.setAttribute("data-pointvalue", pointValue);
-    input.setAttribute("data-ismultiplied", isMultiplied);
-    
-    input.setAttribute("id",name);
-    
-    //Add options
-    options = options.split(",");
-    for (value of options){
-        let option = document.createElement("option");
-        option.innerText = value;
-        input.appendChild(option);
-    }
-    input.setAttribute("id",name);
-    container.appendChild(input);
-    
-    //Multiplier label
-    let span = document.createElement("span");
-    span.setAttribute("class", "multiplierLabel");
-    //console.log(pointValue);
-    //Choose the seccond point value if it is a list
-    
-    span.innerText = "x" + pointValue;
-    
-    if(hasMultiplierLabels){
-        container.appendChild(span);
-    }
-    
-    //Whether to include <br> or not
-    if(newLine){
-        container.appendChild(document.createElement("br"));
-    }
-    
-    //Add the container to to the <div>
-    inputDiv.appendChild(container);
+/*This function creates a flex div around a 
+ *@param parentDiv The parent element that the flex div will be added to 
+ *@param childElement The element that will be put inside the flex div
+ *@return
+ */
+function addFlexDivAroundElement(parentDiv, childElement){
+    let container = document.createElement("div");
+    container.appendChild(childElement);
+    container.setAttribute("class","flex");
+    parentDiv.appendChild(container);
 }
 
-function addInputCheckbox(name, pointValue, newLine, isMultiplied, column){
-    let inputDiv = document.getElementById(column);
-    let container = document.createElement("span");
-    container.setAttribute("class","container");
-    
-    //Label
-    let label = document.createElement("label");
-    label.innerText = name + ": ";
-    container.appendChild(label);
-    
-    //Checkbox input
-    let input = document.createElement("input");
-    input.setAttribute("class","CheckBox sum");
-    input.setAttribute("id",name);
-    
-    //Store variables in the element
-    input.setAttribute("data-pointvalue", pointValue);
-    input.setAttribute("data-ismultiplied", isMultiplied);
-    
-    input.type = "checkbox";
-    container.appendChild(input);
-    
-    //Multiplier label
-    let span = document.createElement("span");
-    span.setAttribute("class", "multiplierLabel");
-    //console.log(pointValue);
-    span.innerText = "x" + pointValue;
-    
-    if(hasMultiplierLabels){
-        container.appendChild(span);
-    }
-    
-    //Whether to include <br> or not
-    if(newLine){
-        container.appendChild(document.createElement("br"));
-    }
-    
-    //Add the container to to the <div>
-    inputDiv.appendChild(container);
-}
-
-function updateScoreMultipliers(){
-    let m = difficultyMultiplier;
-    scoreMultipliers = [100,100,10*m,10*m,5*m,5*m,15*m,15*m,10*m,7*m,20*m,60*m,20*m,30*m,90*m];
-}
 
 //This function advances to the next match
 function nextMatch(){
