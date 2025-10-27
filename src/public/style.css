@@ -18,6 +18,20 @@ Version: 0.1
 html {
     font-family: "Montserrat", sans-serif;
 }
+.teamDropdown{
+    position: relative;
+    width: 150px;
+    height:30px;
+    top: 1px;
+    left: 0;
+    background-color: #d9d9d9;
+    border-radius: 114px;
+    text-align: center;
+    font-size: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 2px solid black
+}
 .flex{
    text-align: start;
     align-items: start;
@@ -34,7 +48,7 @@ html {
   background-color: lightblue;
 }
 
-}
+
 .container {
     text-align: start;
     align-items: start;
@@ -199,7 +213,7 @@ html {
 }
 
 /* Logo image (left side) */
-/#logo {              /* Prevents it from getting too big */
+#logo {              /* Prevents it from getting too big */
   height: auto;                   /* Keeps proportions */
    
   object-fit: contain;

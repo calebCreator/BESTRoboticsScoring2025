@@ -146,8 +146,8 @@ def resetDatabase():
 if __name__ == '__main__':
     # Use 0.0.0.0 so the server is reachable from other hosts if needed
     # Debug off by default; can set FLASK_DEBUG=1 env var when developing
-    if(input("Reset database? (y/n): ") == "y"):
-        resetDatabase()
+    #if(input("Reset database? (y/n): ") == "y"):
+    #    resetDatabase()
     app.run(host='0.0.0.0', port=5020)
 
 

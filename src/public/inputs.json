@@ -30,7 +30,7 @@
     "False Factoids Collected":{
         "type":"number",
         "options":"any",
-        "maxInput":"78",
+        "maxInput":"117",
         "pointValue":"-10",
         "multiplied":"false",
         "lineBreak":"true",
@@ -60,7 +60,7 @@
     "True Factoids Installed":{
         "type":"number",
         "options":"any",
-        "maxInput":"117",
+        "maxInput":"78",
         "pointValue":"15",
         "multiplied":"false",
         "lineBreak":"true",
@@ -69,7 +69,7 @@
     "False Factoids Installed":{
         "type":"number",
         "options":"any",
-        "maxInput":"117",
+        "maxInput":"144",
         "pointValue":"-15",
         "multiplied":"false",
         "lineBreak":"true",
@@ -80,7 +80,7 @@
         "type":"number",
         "options":"any",
         "maxInput":"4",
-        "pointValue":"0,5,15,45,145",
+        "pointValue":"0,100,130,140,145",
         "multiplied":"false",
         "lineBreak":"true",
         "column":"right"
@@ -125,7 +125,7 @@
     "Live 2-Node Neural Net Bonus":{
         "type":"number",
         "options":"any",
-        "maxInput":"4",
+        "maxInput":"2",
         "pointValue":"30",
         "multiplied":"false",
         "lineBreak":"true",

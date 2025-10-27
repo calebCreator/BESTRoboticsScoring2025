@@ -1,6 +1,6 @@
 let total;
 let inputJSON;
-let csv;
+let txt;
 const hasMultiplierLabels = false;
 
 //
@@ -23,7 +23,7 @@ function init(){
     //updateScoreMultipliers();
     //updateMultiplierLabels();
     fetchJSONData();
-    fetchCSV()
+    fetchTeams()
     
     
     
@@ -31,7 +31,7 @@ function init(){
     setInterval(calculateScores, 500);
     
     //Add event listener to update the team when the match is changed
-    document.getElementById('matchNumber').addEventListener('change', updateTeam);
+    //document.getElementById('matchNumber').addEventListener('change', updateTeam);
     
 }
 
@@ -54,28 +54,40 @@ function fetchJSONData() {
 
 }
 
-function fetchCSV() {
-    url = "./schedule.csv";
+function fetchTeams() {
+    url = "./teams.txt";
     fetch(url)
     .then(response => {
         if (!response.ok){
-            throw new Error("Failed to read CSV file")
+            throw new Error("Failed to read text file")
         }
         return response.text();
     })
     .then(data => {
-        processCSV(data);
+        processTxt(data);
     })
     .catch((error) => {
-        console.log('Error fetching CSV:', error);
+        console.log('Error fetching Txt file:', error);
     })
 }
 
-function processCSV(theCSV)
+function processTxt(theTxt)
 {
-    csv = theCSV.split(" ");
+    txt = theTxt.split("\n");
+    for(let team of txt){
+        console.log(team);
+    }
+    
+    teams = document.getElementById("teamDisplay");
+    for (team of txt){
+        let option = document.createElement("option");
+        option.innerText = team;
+        teams.appendChild(option);
+    }
 }
 
+//Defunct function
+/*
 function updateTeam()
 {
     let output = document.getElementById('teamDisplay');
@@ -84,7 +96,7 @@ function updateTeam()
     field = localStorage.getItem("fieldColor");
     console.log(field + " match " + match);
     try {
-        team = csv[match-1][field];
+        team = txt[match-1][field];
     }
     catch (error){
         team = "Out of bounds"
@@ -94,7 +106,7 @@ function updateTeam()
     output.innerHTML = team;
     
     
-}
+}*/
 
 function addInputs(jsonObj){
     //Get the keys from the json object
@@ -124,18 +136,18 @@ function addInputs(jsonObj){
         }
         
         if(type == "number"){
-            addInput("number", name, pointValue, lineBreak,isMultiplied,div,theMaxInput=maxInput);
+            addInput("number", name, pointValue, lineBreak,isMultiplied,div,maxInput, "");
         }else if(type == "dropdown"){
-            addInput("dropdown", name, pointValue, lineBreak, isMultiplied,div, theOptions=options);
+            addInput("dropdown", name, pointValue, lineBreak, isMultiplied,div, 10000, options);
         }else if(type == "checkbox"){
-            addInput("checkbox", name, pointValue, lineBreak, isMultiplied, div);
+            addInput("checkbox", name, pointValue, lineBreak, isMultiplied, div, 1000, "");
         }else{
             console.log("Invalid input type: " + input);
         }
     }
 }
 
-function addInput(objectType, name, pointValue, newLine, isMultiplied, column, theMaxInput=100000, theOptions=""){
+function addInput(objectType, name, pointValue, newLine, isMultiplied, column, theMaxInput, theOptions){
     let inputDiv = document.getElementById(column);
     let container = document.createElement("div");
     container.setAttribute("class","container");
@@ -417,6 +429,7 @@ function send(){
                    
         data["field"] = localStorage.getItem("code");
         data["matchNum"] = document.getElementById("matchNum").value;
+        data["team"] = document.getElementById("teamDisplay").value;
         
         //include all the sums
         let inputs = document.getElementsByClassName("sum");
