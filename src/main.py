@@ -1,5 +1,6 @@
 import os
 import sqlite3
+import json
 from flask import Flask, request, jsonify, send_from_directory, session, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from os import path
@@ -13,6 +14,32 @@ app.secret_key = os.urandom(24)  # Secret key for session management
 #SQL Alchemy attempt
 #app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DB_NAME}"
 PUBLIC_DIR = os.path.join(os.path.dirname(__file__), 'public')
+
+
+def get_input_keys(json_path=None):
+    """
+    Read `public/inputs.json` and return a list of top-level keys.
+
+    If `json_path` is not provided, the function will look for `public/inputs.json`
+    next to this file. Keys are stripped of leading/trailing whitespace.
+
+    Returns an empty list if the file is missing or the JSON root is not an object.
+    """
+    if json_path is None:
+        json_path = os.path.join(os.path.dirname(__file__), 'public', 'inputs.json')
+    try:
+        with open(json_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+    except FileNotFoundError:
+        return []
+    except json.JSONDecodeError:
+        # malformed JSON
+        return []
+
+    if isinstance(data, dict):
+        # strip whitespace from keys and preserve order
+        return [k.strip() for k in data.keys()]
+    return []
 #SQL Alchemy attempt
 #db.init_app(app)
 
@@ -99,12 +126,22 @@ def storeJSONInDatabase(json):
     #Execute SQL commands
     connection = sqlite3.connect("scores.db", timeout=10)
     cursor = connection.cursor()
-    cursor.execute(sql)
-    cursor.execute(sql2)
+    print(sql)
+    print(sql2)
+    # cursor.execute(sql)
+    # cursor.execute(sql2)
     connection.commit()
     cursor.close()
     connection.close()
 
+# def storeJSONInDatabase(json):
+#     connection = sqlite3.connect("scores.db", timeout=10)
+#     cursor = connection.cursor()
+#     keys = ["Z" + key.replace(" ", "_").replace("-", "_") for key in json]
+#     keyStr = ", ".join(keys)
+#     # keyStr = "(match_id, " + keyStr + ")"
+
+    
 
 @app.route('/')
 def index():
@@ -148,7 +185,7 @@ if __name__ == '__main__':
     # Debug off by default; can set FLASK_DEBUG=1 env var when developing
     #if(input("Reset database? (y/n): ") == "y"):
     #    resetDatabase()
-    app.run(host='0.0.0.0', port=5020)
+    app.run(host='0.0.0.0', port=5000)
 
 
 
