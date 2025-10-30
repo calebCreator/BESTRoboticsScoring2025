@@ -450,7 +450,7 @@ function send(){
         
         
         data["totalScore"] = total.toString();
-        document.getElementById("jsonOut").innerHTML = JSON.stringify(data);
+        //document.getElementById("jsonOut").innerHTML = JSON.stringify(data);
         
         
         updateMatch();
@@ -485,11 +485,14 @@ function sendToServer(dataToSend){
     .then(response => {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
+        }else{
+            window.location.reload();
         }
         return response.json(); // If expecting a JSON response
     })
     .then(data => {
         console.log('Success:', data);
+        
     })
     .catch(error => {
         console.error('Error Special:', error);
