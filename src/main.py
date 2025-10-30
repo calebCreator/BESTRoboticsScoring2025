@@ -124,7 +124,8 @@ def storeJSONInDatabase(json):
     sql2 = "INSERT INTO scoress " + keyStr + " VALUES " + valuesStr
 
     #Execute SQL commands
-    connection = sqlite3.connect("scores.db", timeout=10)
+    dbPath = os.getenv('DATABASE_PATH', 'scores.db')
+    connection = sqlite3.connect(dbPath, timeout=10)
     cursor = connection.cursor()
     print(sql)
     print(sql2)
