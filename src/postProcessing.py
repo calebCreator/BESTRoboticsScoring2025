@@ -223,34 +223,63 @@ def plot_points_xy(lines: List[Tuple[List[Tuple[float, float]]]],
                    xlabel="x",
                    ylabel="y",
                    save_path: str | None = None):
-    
     plt.figure(figsize=(8, 5))
-    # Unpack
-    for line in lines:
-        title = line[0]
-        points = line[1]
+
+    # Plot each series and keep references to the Line2D objects so we can toggle them
+    plotted_lines = []  # list of Line2D objects
+    for series in lines:
+        label = series[0]
+        points = series[1]
         xs, ys = zip(*points) if points else ([], [])
-        plt.plot(xs, ys, linestyle='-', marker='o', label=title)  # line + markers
-        #plt.scatter(xs, ys, color='red', label='points')  # explicit scatter
-    
+        line_obj, = plt.plot(xs, ys, linestyle='-', marker='o', label=label)
+        # default to hidden so user can enable series via legend click
+        #line_obj.set_visible(False)
+        plotted_lines.append(line_obj)
+
     plt.title(title)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
-    plt.legend()
+    legend = plt.legend()
     plt.grid(True)
     plt.tight_layout()
+
+    # Make legend entries pickable and wire up a pick event to toggle visibility
+    if legend is not None:
+        for legline in legend.get_lines():
+            legline.set_picker(5)  # 5 points tolerance
+            # dim legend entry initially since corresponding line is hidden
+            legline.set_alpha(1)
+
+        def on_pick(event):
+            # The picked artist will be one of the legend lines
+            legline = event.artist
+            try:
+                legend_lines = legend.get_lines()
+                idx = legend_lines.index(legline)
+            except ValueError:
+                return
+
+            orig_line = plotted_lines[idx]
+            vis = not orig_line.get_visible()
+            orig_line.set_visible(vis)
+            # dim the legend entry to show it's hidden
+            legline.set_alpha(1.0 if vis else 0.2)
+            # redraw the figure canvas
+            plt.gcf().canvas.draw()
+
+        plt.gcf().canvas.mpl_connect('pick_event', on_pick)
+
     if save_path:
         plt.savefig(save_path, dpi=150)
         print(f"Saved plot to {save_path}")
+
     plt.show()
 
 
 sample = [(0, 1), (1, 3), (2, 2.5), (3, 5), (4, 4.5)]
 sample = getTeamScoresInPoints("Spring Branch Middle School")
 lines = getAllTeamGraphs()
-#print(lines)
 plot_points_xy(lines, title="Scores")
 
-printArr(getValidMatches("Navarro High School"))
 
 
