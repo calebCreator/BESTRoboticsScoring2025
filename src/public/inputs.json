@@ -1,5 +1,5 @@
 {
-    " Golden Factoid Collected":{
+    "Golden Factoid Collected":{
         "type":"checkbox",
         "options":"any",
         "maxInput":"1",
@@ -19,7 +19,7 @@
         "column":"left",
         "title":"WF is supported by robot"
     },
-    "True Factoids Collected":{
+    "Net True Factoids Collected":{
         "type":"number",
         "options":"any",
         "maxInput":"78",
@@ -30,18 +30,7 @@
         "title":"TF are on the robot"
         
     },
-    "False Factoids Collected":{
-        "type":"number",
-        "options":"any",
-        "maxInput":"144",
-        "pointValue":"-10",
-        "multiplied":"false",
-        "lineBreak":"true",
-        "column":"left",
-        "title":"FF are on the robot"
-        
-    },
-    "True Factoids Sorted":{
+    "Net True Factoids Sorted":{
         "type":"number",
         "options":"any",
         "maxInput":"78",
@@ -52,37 +41,15 @@
         "title":"TF are sorted by the HP"
         
     },
-    "False Factoids Sorted":{
+    "Net True Factoids Installed":{
         "type":"number",
         "options":"any",
-        "maxInput":"144",
-        "pointValue":"-5",
-        "multiplied":"false",
-        "lineBreak":"true",
-        "column":"left",
-        "title":"FF are sorted by the HP"
-        
-    },
-    "True Factoids Installed":{
-        "type":"number",
-        "options":"any",
-        "maxInput":"78",
+        "maxInput":"117",
         "pointValue":"15",
         "multiplied":"false",
         "lineBreak":"true",
         "column":"left",
         "title":"TF are in the NN"
-    },
-    "False Factoids Installed":{
-        "type":"number",
-        "options":"any",
-        "maxInput":"144",
-        "pointValue":"-15",
-        "multiplied":"false",
-        "lineBreak":"true",
-        "column":"left",
-        "title":"FF are in the NN"
-        
     },
     "WSD Gate Latch Released":{
         "type":"number",
@@ -91,7 +58,7 @@
         "pointValue":"0,100,130,140,145",
         "multiplied":"false",
         "lineBreak":"true",
-        "column":"right",
+        "column":"left",
         "title":"Gates activated by team"
         
     },
@@ -133,7 +100,7 @@
         "multiplied":"false",
         "lineBreak":"true",
         "column":"right",
-        "title":"AI selector is changed by team"
+        "title":"Any model is selected"
     },
     "Live 2-Node Neural Net Bonus":{
         "type":"number",

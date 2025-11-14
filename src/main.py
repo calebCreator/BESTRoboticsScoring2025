@@ -104,11 +104,14 @@ def recv_data():
     }
     return jsonify(response), 200
 
+#This function turns a key into a format that is valid for a label in the database
+def standardize(key):
+    return "Z" + key.replace(" ", "_").replace("-", "_")
 
 def storeJSONInDatabase(json):
     #Read the keys and values and turn them into SQL commands
     #Remove all the spaces in each key, so the
-    keys = ["Z" + key.replace(" ", "_").replace("-", "_") for key in json]
+    keys = [standardize(key) for key in json]
     keyStr = ", ".join(keys)
     keyStr = "(match_id, " + keyStr + ")"
 
@@ -185,7 +188,7 @@ if __name__ == '__main__':
     # Use 0.0.0.0 so the server is reachable from other hosts if needed
     # Debug off by default; can set FLASK_DEBUG=1 env var when developing
     #if(input("Reset database? (y/n): ") == "y"):
-    #    resetDatabase()
+    #resetDatabase()
     app.run(host='0.0.0.0', port=5000)
 
 

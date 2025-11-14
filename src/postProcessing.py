@@ -205,18 +205,6 @@ def getAllTeamGraphs():
 
 
 
-data = rows_to_dicts("scorecard.db", "SELECT * FROM scoress")
-matches = makeSimplifiedMatchObj(data)
-teams = getTeams()
-allScores = getAllScores()
-#printDict(allScores)
-teamAverages = getAllTeamAverages()
-leaderboard = rankByAverage(teamAverages)
-
-print("Leaderboard:")
-printArr(leaderboard[0:3])
-
-print("Top Gun: " + str(getTopGun()))
 
 def plot_points_xy(lines: List[Tuple[List[Tuple[float, float]]]],
                    title="My Plot",
@@ -276,10 +264,26 @@ def plot_points_xy(lines: List[Tuple[List[Tuple[float, float]]]],
     plt.show()
 
 
-sample = [(0, 1), (1, 3), (2, 2.5), (3, 5), (4, 4.5)]
-sample = getTeamScoresInPoints("Spring Branch Middle School")
-lines = getAllTeamGraphs()
-plot_points_xy(lines, title="Scores")
+if __name__ == '__main__':
+
+    data = rows_to_dicts("scorecard.db", "SELECT * FROM scoress")
+    matches = makeSimplifiedMatchObj(data)
+    teams = getTeams()
+    allScores = getAllScores()
+    #printDict(allScores)
+    teamAverages = getAllTeamAverages()
+    leaderboard = rankByAverage(teamAverages)
+
+    print("Leaderboard:")
+    printArr(leaderboard[0:3])
+
+    print("Top Gun: " + str(getTopGun()))
+
+
+    sample = [(0, 1), (1, 3), (2, 2.5), (3, 5), (4, 4.5)]
+    sample = getTeamScoresInPoints("Spring Branch Middle School")
+    lines = getAllTeamGraphs()
+    plot_points_xy(lines, title="Scores")
 
 
 

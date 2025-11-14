@@ -384,6 +384,8 @@ function calculateScores(){
     //Update the multiplier arrays  and elements
     //updateScoreMultipliers();
     //updateMultiplierLabels();
+
+    //console.log(parts[0].checked)
     
      
 }
@@ -446,8 +448,16 @@ function send(){
         
         //Loop through the html elements in the input list
         for (key of inputs){
-            //Save the element id and element value as a key-value pair
-            inputValues[key.id] = key.value;
+            if (key.type == "checkbox"){
+                //Add .checked for checkbox elements
+                inputValues[key.id] = (key.checked).toString();
+            }else{
+                //Save the element id and element value as a key-value pair
+                inputValues[key.id] = key.value;
+            }
+
+
+            
             
         }
         
@@ -461,6 +471,7 @@ function send(){
         updateMatch();
         nextMatch();
         console.log(inputs);
+        console.log(data)
         
         sendToServer(data);
         
