@@ -1,10 +1,13 @@
 import os
 import json
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Callable, Union
+import sqlite3
 
 import main
 
 import postProcessing
+import shutil
+from datetime import datetime
 
 
 def load_inputs_as_list(json_path: Optional[str] = None) -> List[Dict[str, Any]]:
@@ -77,7 +80,8 @@ def turnInputsIntoPointValues(inputs):
 
     return pointValues
 
-def calcualteTotalScore(match, pointValues):
+def calcualteTotalScore(match):
+    global pointValues
     total = 0
 
     #Print matching column names
@@ -113,9 +117,88 @@ def calcualteTotalScore(match, pointValues):
 
             total += points
     
-
-
     return total
+
+
+def copy_database(src_db: Optional[str] = None, dest_db: Optional[str] = None) -> str:
+    """
+    Create a copy of the SQLite database file `scorecard.db`.
+
+    - If `src_db` is not provided, the function looks for `scorecard.db` next to
+      this module (`src/scorecard.db`).
+    - If `dest_db` is not provided the function creates a filename next to the
+      source file with suffix `_copy_YYYYmmdd_HHMMSS`.
+
+    Returns the path to the copied file. Raises FileNotFoundError if the source
+    database doesn't exist.
+    """
+    if src_db is None:
+        # default to the directory above this module
+        src_db = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'scorecard.db')
+
+    # resolve relative path
+    if not os.path.isabs(src_db):
+        src_db = os.path.join(os.path.dirname(os.path.dirname(__file__)), src_db)
+
+    if not os.path.exists(src_db):
+        raise FileNotFoundError(f"Source database not found: {src_db}")
+
+    if dest_db is None:
+        base, ext = os.path.splitext(src_db)
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        #dest_db = f"{base}_copy_{timestamp}{ext}"
+        dest_db = f"{base}_copy.db"
+
+    shutil.copy2(src_db, dest_db)
+    return dest_db
+
+
+def set_column_for_all_rows(db_path: Optional[str] = None,
+                            table: str = 'scoress',
+                            column: str = 'ZtotalScore',
+                            value_or_callable: Union[int, Callable[[Dict[str, Any]], int]] = 0) -> int:
+    """
+    Iterate over all rows in `table` inside `db_path` and set `column` to a new value.
+
+    - `db_path` defaults to the file `scorecard.db` in the directory above this module.
+    - `value_or_callable` may be an int (the value to set for every row) or a
+      callable that receives a dictionary of the row (including 'rowid') and
+      returns an int to set for that specific row.
+
+    Returns the number of rows updated.
+    """
+    if db_path is None:
+        db_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'scorecard_copy.db')
+
+    if not os.path.isabs(db_path):
+        db_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), db_path)
+
+    if not os.path.exists(db_path):
+        raise FileNotFoundError(f"Database not found: {db_path}")
+
+    conn = sqlite3.connect(db_path)
+    cur = conn.cursor()
+
+    # Retrieve rowid and all columns so the callable has context
+    cur.execute(f"SELECT rowid, * FROM {table}")
+    cols = [d[0] for d in cur.description]  # first entry will be 'rowid'
+    rows = cur.fetchall()
+
+    updated = 0
+    for r in rows:
+        row = dict(zip(cols, r))
+        if callable(value_or_callable):
+            new_val = value_or_callable(row)
+        else:
+            new_val = value_or_callable
+
+        # perform the update by rowid
+        cur.execute(f"UPDATE {table} SET {column} = ? WHERE rowid = ?", (new_val, row['rowid']))
+        updated += cur.rowcount
+
+    conn.commit()
+    conn.close()
+    return updated
 
 if __name__ == '__main__':
     # demo: load inputs.json and print a compact summary
@@ -132,7 +215,11 @@ if __name__ == '__main__':
 
     matches = postProcessing.rows_to_dicts("scorecard.db", "SELECT * FROM scoress")
     #print(matches[0])
-    print(calcualteTotalScore(matches[10], pointValues))
+    print(calcualteTotalScore(matches[10]))
+
+    copy_database()
+    set_column_for_all_rows(value_or_callable = calcualteTotalScore)
+
     #for match in matches:
     #    print(str(match) + "\n\n\n")
 
