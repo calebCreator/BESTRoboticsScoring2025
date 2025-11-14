@@ -126,6 +126,7 @@ function addInputs(jsonObj){
         let isMultiplied = input["multiplied"];
         let lineBreak = input["lineBreak"];
         let column = input["column"];
+        let title = input["title"];
         let div;
         if(column == "left"){
             div = "left"
@@ -136,18 +137,18 @@ function addInputs(jsonObj){
         }
         
         if(type == "number"){
-            addInput("number", name, pointValue, lineBreak,isMultiplied,div,maxInput, "");
+            addInput("number", name, pointValue, lineBreak,isMultiplied,div,maxInput, "", title);
         }else if(type == "dropdown"){
-            addInput("dropdown", name, pointValue, lineBreak, isMultiplied,div, 10000, options);
+            addInput("dropdown", name, pointValue, lineBreak, isMultiplied,div, 10000, options, title);
         }else if(type == "checkbox"){
-            addInput("checkbox", name, pointValue, lineBreak, isMultiplied, div, 1000, "");
+            addInput("checkbox", name, pointValue, lineBreak, isMultiplied, div, 1000, "", title);
         }else{
             console.log("Invalid input type: " + input);
         }
     }
 }
 
-function addInput(objectType, name, pointValue, newLine, isMultiplied, column, theMaxInput, theOptions){
+function addInput(objectType, name, pointValue, newLine, isMultiplied, column, theMaxInput, theOptions, theTitle){
     let inputDiv = document.getElementById(column);
     let container = document.createElement("div");
     container.setAttribute("class","container");
@@ -155,6 +156,10 @@ function addInput(objectType, name, pointValue, newLine, isMultiplied, column, t
     //Label
     let label = document.createElement("label");
     label.innerText = name + ": ";
+    
+    //Add instruction text
+    label.setAttribute("title", theTitle);
+
     //container.appendChild(label);
     addFlexDivAroundElement(container, label);
 

@@ -6,7 +6,8 @@
         "pointValue":"100",
         "multiplied":"false",
         "lineBreak":"true",
-        "column":"left"
+        "column":"left",
+        "title":"GF is supported by robot"
     },
     "White Factoid Collected":{
         "type":"checkbox",
@@ -15,7 +16,8 @@
         "pointValue":"100",
         "multiplied":"false",
         "lineBreak":"true",
-        "column":"left"
+        "column":"left",
+        "title":"WF is supported by robot"
     },
     "True Factoids Collected":{
         "type":"number",
@@ -24,17 +26,19 @@
         "pointValue":"10",
         "multiplied":"false",
         "lineBreak":"true",
-        "column":"left"
+        "column":"left",
+        "title":"TF are on the robot"
         
     },
     "False Factoids Collected":{
         "type":"number",
         "options":"any",
-        "maxInput":"117",
+        "maxInput":"144",
         "pointValue":"-10",
         "multiplied":"false",
         "lineBreak":"true",
-        "column":"left"
+        "column":"left",
+        "title":"FF are on the robot"
         
     },
     "True Factoids Sorted":{
@@ -44,17 +48,19 @@
         "pointValue":"5",
         "multiplied":"false",
         "lineBreak":"true",
-        "column":"left"
+        "column":"left",
+        "title":"TF are sorted by the HP"
         
     },
     "False Factoids Sorted":{
         "type":"number",
         "options":"any",
-        "maxInput":"78",
+        "maxInput":"144",
         "pointValue":"-5",
         "multiplied":"false",
         "lineBreak":"true",
-        "column":"left"
+        "column":"left",
+        "title":"FF are sorted by the HP"
         
     },
     "True Factoids Installed":{
@@ -64,7 +70,8 @@
         "pointValue":"15",
         "multiplied":"false",
         "lineBreak":"true",
-        "column":"left"
+        "column":"left",
+        "title":"TF are in the NN"
     },
     "False Factoids Installed":{
         "type":"number",
@@ -73,7 +80,8 @@
         "pointValue":"-15",
         "multiplied":"false",
         "lineBreak":"true",
-        "column":"left"
+        "column":"left",
+        "title":"FF are in the NN"
         
     },
     "WSD Gate Latch Released":{
@@ -83,7 +91,8 @@
         "pointValue":"0,100,130,140,145",
         "multiplied":"false",
         "lineBreak":"true",
-        "column":"right"
+        "column":"right",
+        "title":"Gates activated by team"
         
     },
     "Tweeter Tower Activation":{
@@ -93,7 +102,8 @@
         "pointValue":"7",
         "multiplied":"false",
         "lineBreak":"true",
-        "column":"right"
+        "column":"right",
+        "title":"TTs opended by robot"
     },
     "2-Node Neural Net Connections":{
         "type":"number",
@@ -102,7 +112,8 @@
         "pointValue":"20",
         "multiplied":"false",
         "lineBreak":"true",
-        "column":"right"
+        "column":"right",
+        "title":"Tile is placed that connects 2 holes"
     },
     "3-Node Neural Net Connections":{
         "type":"number",
@@ -111,25 +122,28 @@
         "pointValue":"60",
         "multiplied":"false",
         "lineBreak":"true",
-        "column":"right"
+        "column":"right",
+        "title":"2 tiles are placed that connect 3 holes"
     },
     "AI Model Selected":{
-        "type":"number",
+        "type":"checkbox",
         "options":"any",
         "maxInput":"1",
         "pointValue":"20",
         "multiplied":"false",
         "lineBreak":"true",
-        "column":"right"
+        "column":"right",
+        "title":"AI selector is changed by team"
     },
     "Live 2-Node Neural Net Bonus":{
         "type":"number",
         "options":"any",
-        "maxInput":"2",
+        "maxInput":"4",
         "pointValue":"30",
         "multiplied":"false",
         "lineBreak":"true",
-        "column":"right"
+        "column":"right",
+        "title":"2 TFs are installed in a 2-Node connection"
     },
      "Live 3-Node Neural Net Bonus":{
         "type":"number",
@@ -138,15 +152,17 @@
         "pointValue":"90",
         "multiplied":"false",
         "lineBreak":"true",
-        "column":"right"
+        "column":"right",
+        "title":"3 TFs are installed in a 3-Node connection"
     },
     "Network Configuration Match":{
         "type":"dropdown",
-        "options": "A,B,C", 
+        "options": "-,A,B,C", 
         "maxInput":"117",
-        "pointValue":"15",
+        "pointValue":"0,100,125,150",
         "multiplied":"false",
         "lineBreak":"true",
-        "column":"right"
+        "column":"right",
+        "title":"Tiles are placed that match the selected configuration"
     }
 }
